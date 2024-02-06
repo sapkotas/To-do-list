@@ -17,6 +17,7 @@ const AddToDo = () => {
 
   const addToDo = (e) => {
     e.preventDefault(); // Prevent default form submission behavior
+    
     const todoString = todoText.current.value; // Get the value of the to-do item from the input field
 
     // Retrieve existing to-dos from local storage or initialize an empty array

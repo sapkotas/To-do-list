@@ -4,7 +4,10 @@ const NavBar = () => {
   return (
     <>
       <div className="nav_bar">
-        To-do v1
+        <Link to="/">
+          <div style={{ color: "white" }}> To-do v1</div>
+        </Link>
+
         <div className="menu_items">
           <Link to="/">
             <div>Home</div>

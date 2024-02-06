@@ -1,25 +1,21 @@
 // Import necessary components and icons
-import NavBar from "../NavBar"; 
-import { FaRegEye } from "react-icons/fa"; 
-import { CgOptions } from "react-icons/cg"; // Importing options icon
-import { Link, Route, Routes, useNavigate } from "react-router-dom"; 
 
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
+import NavBar from "../../NavBar";
 
 const Login = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   // Render Login component
   return (
     <>
       <NavBar /> {/* Render navigation bar component */}
-
       <div className="todo_container">
         {/* Conditional rendering based on login status */}
         {localStorage.getItem("loggedIn") ? (
           // Rendered when user is logged in
           <>
-            You are already logged in!{" "}
-            {/* Logout button */}
+            You are already logged in! {/* Logout button */}
             <b
               onClick={() => {
                 localStorage.removeItem("loggedIn"); // Remove logged-in status from local storage
@@ -67,6 +63,5 @@ const Login = () => {
     </>
   );
 };
-
 
 export default Login;

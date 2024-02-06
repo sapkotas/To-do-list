@@ -5,9 +5,8 @@ const NotFound = () => {
     <>
       <NavBar />
 
-      <center> 404. Not Found!</center>
+      <center>404 page not found </center>
     </>
   );
 };
-
 export default NotFound;
