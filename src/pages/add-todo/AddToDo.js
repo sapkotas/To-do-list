@@ -1,49 +1,54 @@
-// Importing necessary dependencies and components
-import { useNavigate } from "react-router-dom";
-import NavBar from "../NavBar";
+// Import necessary hooks and components from React and React Router
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+
+// Import custom components
+import NavBar from "../NavBar";
+import AuthCheck from "../middleware/AuthCheck";
 
 const AddToDo = () => {
+  // Initialize a reference to the input field for the to-do item
   const todoText = useRef();
 
   const navigate = useNavigate();
 
-  // Function to handle the form submission and add a new to-do item
+  // Perform authentication check. This is synchronous, but consider if it's the intended behavior.
+  AuthCheck();
+
   const addToDo = (e) => {
-    // Preventing the default form submission behavior
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission behavior
+    const todoString = todoText.current.value; // Get the value of the to-do item from the input field
 
-    // Extracting the to-do text from the input field using the ref
-    const todoString = todoText.current.value;
-
-    // Retrieving existing to-do items from local storage or initializing an empty array
+    // Retrieve existing to-dos from local storage or initialize an empty array
     const initialTodo = localStorage.getItem("todo")
       ? JSON.parse(localStorage.getItem("todo"))
       : [];
 
-    // Adding the new to-do item to the array
+    // Add the new to-do item to the existing list
     initialTodo.push(todoString);
 
-    // Storing the updated to-do items back in local storage
+    // Update local storage with the updated to-do list
     localStorage.setItem("todo", JSON.stringify(initialTodo));
 
-    navigate("/"); // Using the 'navigate' function to redirect to the home page ("/")
+    // Navigate the user back to the home page after adding the to-do item
+    navigate("/");
   };
 
+  // Render NavBar component and form for adding a to-do item
   return (
     <>
-      <NavBar /> {/* Rendering the NavBar component */}
+      <NavBar /> {/* Render navigation bar component */}
       <div className="todo_container">
+        <h1>Add to-do:</h1> <br /> {/* Header for adding to-do item */}
+        {/* Form for adding to-do item */}
         <form onSubmit={addToDo}>
-          Add to-do:
-          <br />
-          <input type="text" ref={todoText} />
-          <button type="submit">Save To-Do</button>
+          <input type="text" ref={todoText} />{" "}
+          {/* Input field for the to-do item */}
+          <button>Save to-do</button> {/* Button to save the to-do item */}
         </form>
       </div>
     </>
   );
 };
 
-// Exporting the AddToDo component as the default export
 export default AddToDo;

@@ -1,66 +1,87 @@
-// Importing necessary dependencies and components
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+
+import AuthCheckBoolean from "../middleware/AuthcheckBoolean";
+
 import NavBar from "../NavBar";
-import Login from "../login/Login";
 
-// Functional component for the ViewPage
 const ViewPage = () => {
-  // Obtaining the 'navigate' function from React Router
-
   const navigate = useNavigate();
-  const getParams = useParams();
-  const getID = getParams.id;
-  const getStorage = localStorage.getItem("todo")
+  const getParams = useParams(); // Retrieve URL parameters
+  const getID = getParams.id; // Get the ID from URL parameters
+  const getStorage = localStorage.getItem("todo") // Retrieve to-do list from local storage or initialize an empty array
     ? JSON.parse(localStorage.getItem("todo"))
     : [];
-  const getData = getStorage[getID];
+  const getData = getStorage[getID]; // Get the to-do item corresponding to the ID
 
-  const deleteToDo = () => {
-    getStorage.splice(getID, 1);
-    localStorage.setItem("todo", JSON.stringify(getStorage));
-    navigate("/", { replace: true });
+  // Function to delete the to-do item
+  const deleteTodo = () => {
+    getStorage.splice(getID, 1); // Remove the to-do item from the array
+
+    localStorage.setItem("todo", JSON.stringify(getStorage)); // Update local storage with the modified array
+
+    navigate("/", { replace: true }); // Navigate back to the home page
   };
 
   return (
     <>
-      {/* Rendering the NavBar component */}
-      <NavBar />
-      {/* This is view page */}
-      {/* Container for the page content */}
+      <NavBar /> {/* Render navigation bar component */}
       <div className="todo_container">
         {/* Button to go back */}
         <button
-          // Setting up an onClick event handler for the button
           onClick={() => {
-            // Using the 'navigate' function to redirect to the home page ("/")
             navigate("/");
           }}
-          // Applying styles to the button using inline styles
           style={{ background: "#e7e7e7", color: "#666" }}
         >
-          Go back
+          Go Back
         </button>
+        {/* Display the to-do item */}
         <div
           style={{
             background: "#e7e7e7",
-
+            padding: "20px",
             fontSize: "20px",
-            padding: "10px",
-            margin: "10px",
+            margin: "20px",
           }}
         >
           {getData}
         </div>
-        <button style={{ background: "red" }} onClick={deleteToDo}>
-          {" "}
-          Delete Todo
-        </button>
 
-        <Link to="/login" element={<Login />} />
+        {/* Conditional rendering based on authentication status */}
+        {AuthCheckBoolean() ? (
+          // Rendered when user is authenticated
+          <>
+            <button style={{ background: "red" }} onClick={deleteTodo}>
+              {" "}
+              Delete To-do
+            </button>
+          </>
+        ) : (
+          // Rendered when user is not authenticated
+          <>
+            <p>
+              Login to see more options <Link to="/login">Login now!</Link>
+            </p>
+          </>
+        )}
       </div>
     </>
   );
 };
 
-// Exporting the ViewPage component as the default export
 export default ViewPage;
+
+
+  /*// Query parse...
+
+  // const getLocation = useLocation();
+
+  // const getURLParams = new URLSearchParams(getLocation.search);
+
+  // const getID = getURLParams.get("id");
+
+  // console.log(getID);
+
+  // const getData = getStorage[getID];
+
+  // console.log(getLocation.search); */

@@ -8,16 +8,19 @@ const NavBar = () => {
         <div className="menu_items">
           <Link to="/">
             <div>Home</div>
-            <Link to="/login">
-              <div>Log In</div>
-            </Link>
-            <Link to="/addToDo">
-              <div>Add Todo</div>
-            </Link>
+          </Link>
+
+          <Link to="/login">
+            <div>Login</div>
+          </Link>
+
+          <Link to="/add">
+            <div>Add Todo</div>
           </Link>
         </div>
       </div>
     </>
   );
 };
+
 export default NavBar;
