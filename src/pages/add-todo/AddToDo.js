@@ -13,7 +13,7 @@ const AddToDo = () => {
   const navigate = useNavigate();
 
   // Perform authentication check. This is synchronous, but consider if it's the intended behavior.
-  AuthCheck();
+  
 
   const addToDo = (e) => {
     e.preventDefault(); // Prevent default form submission behavior
