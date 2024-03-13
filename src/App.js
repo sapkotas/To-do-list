@@ -1,6 +1,6 @@
 // import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./style/App.css";
-import MainPage from "./pages/mainPage/MainPage";
+
 import Router from "./routes/Router";
 
 const App = () => {
@@ -15,4 +15,4 @@ const App = () => {
     </div>
   );
 };
-export default App;
+export default App;sunab
