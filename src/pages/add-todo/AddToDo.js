@@ -40,7 +40,7 @@ const AddToDo = () => {
     <>
       <NavBar /> {/* Render navigation bar component */}
       <div className="todo_container">
-        <h1>Add to-do:</h1> <br /> {/* Header for adding to-do item */}
+        <h1>Add to-do:</h1> <br /> {/* Header for adding to-do item */}sunab
         {/* Form for adding to-do item */}
         <form onSubmit={addToDo}>
           <input type="text" ref={todoText} />{" "}
